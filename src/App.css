@@ -1,0 +1,16 @@
+/* #root { */
+  /* max-width: 1280px; */
+  /* margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
+.form-box{
+  width: 35%;
+  height: auto;
+  border: 1px solid;
+  border-radius: 15px;
+  box-shadow: 2px 3px 4px 4px;
+}
+h1{
+  text-align: center;
+}
