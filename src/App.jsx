@@ -1,25 +1,40 @@
+import { useEffect, useState } from "react";
 import './App.css'
-import HotelCard from './Components/HotelCard'
-import Data from '../Data.json'
-import Form from './Components/Form.jsx'
-import "./App.css";
-// import Navbar from './Components/Navbar.jsx'
+import Cards from './Components/HotelCard';
+import Nev from './Components/Navbar';
 
- function App(){
-    return(
-        <div>
-             <h1>Shruti...Hotel</h1>
-            {/* <Navbar/> */}
-            {/* <Calender/> */}
-           
-           {Data.map((hoteldetails,index)=>{
-            return(
-                <HotelCard hoteldetails={hoteldetails.hotelName} price={hoteldetails.price}address={hoteldetails.address} image = {hoteldetails.img} key={index} />
-               
-            )    
+function App() {
+    const [data, setData] = useState([])
+    useEffect(() => {
+        fetch("http://localhost:3001/Data")
+            .then((response) =>
+                response.json()
+            )
+            .then((newData) => {
+                //console.log(newData)
+                return setData(newData)
+            });
+    },[])
+    //console.log(data);
+    return (
+        <>
+            <Nev />
+            {data.map((hotel, index) => {
+                return (
+                    <Cards hotelName={hotel.hotelName}
+                        image={hotel.img}
+                        key={hotel.id}
+                        address={hotel.address}
+                        price={hotel.price}
+                        defaultValue={hotel.rating}
+                        hotelList = {data}
+                        hotelId={hotel.id}
+                        availability={hotel.availability}
+                    />
+                )
             })}
-            <Form/>
-        </div>
+        </>
     )
- }
- export default App
+}
+
+export default App

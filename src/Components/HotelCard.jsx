@@ -1,12 +1,17 @@
+import { useState } from 'react'
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { Button, Rating } from '@mui/material';
-
-
-
-const Cards = ({ hoteldetails, image, address, price, defaultValue ,value}) => {
+import { Link } from "react-router-dom";
+import Stack from '@mui/material/Stack';
+import Alert from '@mui/material/Alert';
+const Cards = ({ hotelName, image, address, price, defaultValue,hotelList,hotelId, availability}) => {
+  const newObj = {
+    hotelId :hotelId,
+    hotelList:hotelList
+  }
   return (
     <div>
       <Card
@@ -30,22 +35,41 @@ const Cards = ({ hoteldetails, image, address, price, defaultValue ,value}) => {
         />
         <Box sx={{ alignSelf: 'center', ml: 4 }}>
           <Typography variant="h6" gutterBottom>
-            {hoteldetails}
+            {hotelName}
           </Typography>
           <Rating name="read-only" value={defaultValue} readOnly />
-
           <Typography variant="body2" color="text.secondary" fontWeight="regular">
             {address}
           </Typography>
           <Typography variant="body2" color="text.secondary" fontWeight="regular">
+          availability{availability}
+          </Typography>
+          
+          <Typography variant="body2" color="text.secondary" fontWeight="regular">
             {price}
           </Typography>
-          <Button variant="contained">Book Now</Button>
-          <Typography fontWeight="bold" noWrap gutterBottom>
-          </Typography>
-        </Box>
-      </Card>
-    </div>
+          {availability !== 0 ? (
+            <>
+              <Typography variant="body2" color="text.secondary" fontWeight="regular">
+                availability {availability}
+              </Typography>
+              <Link to={"/form"} state={newObj}>
+                <Button variant="contained">Book</Button>
+              </Link></>) : (<>
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                  <Alert severity="error">Not Availability The room  </Alert>
+                </Stack>
+                <Button variant="contained" disabled>
+                  Disabled
+                </Button>
+              </>
+          )}
+          {/* <Link to={`/form`} state={newObj} ><Button variant="contained">Book</Button >
+          </Link> */}
+      </Box>
+    </Card>
+    </div >
   )
 }
+
 export default Cards
