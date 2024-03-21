@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography } from '@mui/material';
-import Calender from './Calendar';
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from './Navbar';
 const Form = () => {
@@ -16,8 +15,11 @@ const Form = () => {
         lastName: '',
         phoneNumber: '',
         email: '',
+        place: '',
         room: '',
-        date: ''
+        checkin: '',
+        ckeckout:''
+
     });
     const handleChange = (event) => {
         const { id, value } = event.target;
@@ -114,7 +116,24 @@ const Form = () => {
                             onChange={handleChange}
                             required
                         />
-                        <Calender />
+                      <TextField
+                            onChange={handleChange}
+                            id="checkin"
+                            label="Check-in"
+                            type="date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            onChange={handleChange}
+                            id="checkout"
+                            label="Check-out"
+                            type="date"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
 
                         <div className='button'>
                             <Button variant="contained" type='submit'>Submit</Button>
